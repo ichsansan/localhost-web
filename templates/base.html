@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<head>
+    <title>BAT Rollout Project</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="https://getbootstrap.com/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+
+    <!-- Favicons -->
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/bootstrap.css" rel="stylesheet">
+    <link href="static/css/custom_sidebar.css" rel="stylesheet">
+    <link href="static/css/custom_body.css" rel="stylesheet">
+
+    <!-- <link rel="icon" href="https://getbootstrap.com/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png"> -->
+    <link rel="icon" href="static/feather.png" sizes="32x32" type="image/png">
+
+</head>
+<body>
+    <main class="overflow-auto text-light" style="height: 100vh; background-color: #111;">
+    <!-- <main class="overflow-auto text-light bg-dark"> -->
+        <header class="p-3">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                    <a href="/" class="d-flex align-items-center mb-0 mb-lg-0 text-decoration-none">
+                        <!-- <svg class="bi me-2" width="40" height="32" ></svg> -->
+                        <object data="/static/figure/logo-pjb.svg"></object>
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 ms-4 justify-content-center mb-md-0">
+                        <li><a href="/" class="nav-link px-2 text-light active">Restart Services</a></li>
+                        <li><a href="/bat-status" class="nav-link px-2 text-light">BAT Status</a></li>
+                        <li><a href="/docker-status" class="nav-link px-2 text-light">Docker Status</a></li>
+                        <li><a href="/daily-report" class="nav-link px-2 text-light">Daily Reporting</a></li>
+                        <li><a href="#" class="nav-link px-2 text-light">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="container py-2">
+            {% block content %} {% endblock %}
+        </div>
+    </main>
+</body>

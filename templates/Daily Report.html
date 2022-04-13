@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="">Daily Reporting</h3>
+
+<div class="row m-auto">
+    <form action="/daily-report-BAT">
+        <div class="mb-3 row">
+            <label for="unitName" class="col-sm-2 col-form-label">Reports kind</label>
+            <div class="col-sm-6">
+                <select class="form-select" id="unitName" name="unitName">
+                    <option value="TAA1">BAT Report Tanjung Awar-Awar Unit 1</option>
+                    <option value="TAA2">BAT Report Tanjung Awar-Awar Unit 2</option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="dateInput" class="col-sm-2 col-form-label">Date</label>
+            <div class="col-sm-6">
+                <input type="date" class="form-control" id="dateInput" name="dateInput">
+            </div>
+        </div>
+        <div class="col">
+            <button class="btn btn-light" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

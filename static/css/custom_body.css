@@ -1,0 +1,4 @@
+.table-hover>tbody>tr:hover>* {
+    color: gray;
+    background-color: rgba(0,0,0,0.1);
+}
