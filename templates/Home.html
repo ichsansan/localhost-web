@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<h3 class="text-center">Combustion Optimization</h3>
+<h3 class="text-center">Restart Service</h3>
 
 <div class="row p-3">
-    <div class="col"></div>
     <div class="col-auto text-center">
-        Restart Services: Pastikan tidak ada proses Sootblow Optimization dan Combustion Optimization yang sedang
-        berjalan
+        <p>
+            Fitur ini digunakan ketika aliran data SOPT ataupun COPT mengalami masalah di write maupun <span class="fst-italic">read</span>-nya. 
+            Fitur ini juga dibutuhkan ketika OPC baru saja di-<span class="fst-italic">restart</span>, maka dibutuhkan 
+            untuk merestart Service pada server BAT juga
+        </p>
+        Pastikan tidak ada proses <span class="fw-bolder">Sootblow Optimization</span> dan <span class="fw-bolder">Combustion Optimization</span> yang sedang berjalan.
     </div>
     <div class="col"></div>
 </div>

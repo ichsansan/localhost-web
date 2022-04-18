@@ -1,3 +1,5 @@
+FOLDER_NAME = '/root/SourceCode/Reset Page/dst'
+
 UNIT_CONFIG = {
     'TAA1': {
         'HOST': '192.168.1.10',

@@ -1,6 +1,9 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, render_template, redirect
+from flask import request, send_from_directory
 from process import *
-import time, subprocess
+from dailyreporting import generate_report
+from config import FOLDER_NAME
+import time, os
 
 app = Flask(__name__)
 debug_mode = True
@@ -29,13 +32,26 @@ def restartservices():
 def daily_report():
     return render_template("Daily Report.html")
 
-@app.route("/daily-report-BAT")
-def daily_report_BAT():
+@app.route("/daily-report-html")
+def daily_report_html():
     inputs = dict(request.args)
-    data = get_daily_report_BAT(unitname = inputs['unitName'],date = inputs['dateInput'])
-    return render_template("Daily Report Monitoring BAT UJTA.html", data=data)
+    if inputs["unitName"] == 'Excelfile':
+        filename = generate_report(datestart = inputs['datestart'], dateend = inputs['dateend'])
+        return redirect(f"/download/{filename}")
+    elif inputs["unitName"] == "HTMLfile":
+        data = generate_report(datestart=inputs['datestart'], dateend=inputs['dateend'], kind="html")
+        return render_template("Perhitungan Kertas Kerja BATTJA.htm", home = data['home'], s1 = data['s1'], s2 = data['s2'])
+    else:
+        return render_template("Daily Report Monitoring BAT UJTA.html", data={})
 
+@app.route("/download/<filename>")
+def download(filename):
+    path = os.path.join(FOLDER_NAME, filename)
+    if os.path.isfile(path):
+        return send_from_directory(FOLDER_NAME, filename, as_attachment=True)
+    else:
+        listfiles = os.listdir(FOLDER_NAME)
+        return f"""file {filename} not found. \nFile found: {listfiles}"""
 
 if __name__ == "__main__":
-    if debug_mode:
-        app.run('0.0.0.0', port=5002, debug=debug_mode)
+    app.run('0.0.0.0', port=5002, debug=True)
