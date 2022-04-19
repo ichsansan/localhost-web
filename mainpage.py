@@ -11,36 +11,41 @@ fetch_realtime = True
 
 @app.route("/")
 def page_home():
-    return render_template('Home.html')
-
-@app.route("/bat-status")
-def page_bat_status():
     data = get_bat_status()
-    return render_template('BAT Status.html', data = data)
+    return render_template('Main-page.html', data = data)
 
-@app.route("/docker-status")
+@app.route("/Main-page.html")
+def mainpage():
+    return redirect("/")
+
+@app.route("/Reset-Page.html")
+def page_bat_status():
+    return render_template('Reset-Page.html')
+
+@app.route("/Docker-status.html")
 def page_docker_status():
     docker_status = get_docker_status()
-    return render_template('Docker Status.html', data = docker_status)
+    return render_template('Docker-status.html', data = docker_status)
 
 @app.route("/restartservices")
 def restartservices():
     data = do_restart_services()
     return render_template("Restartresponse.html", data = data)
 
-@app.route("/daily-report")
+@app.route("/Reporting.html")
 def daily_report():
-    return render_template("Daily Report.html")
+    return render_template("Reporting.html")
 
 @app.route("/daily-report-html")
 def daily_report_html():
     inputs = dict(request.args)
-    if inputs["unitName"] == 'Excelfile':
+    print(inputs)
+    if 'Excel' in inputs["document"]:
         filename = generate_report(datestart = inputs['datestart'], dateend = inputs['dateend'])
         return redirect(f"/download/{filename}")
-    elif inputs["unitName"] == "HTMLfile":
+    elif inputs["document"] == "HTMLfile":
         data = generate_report(datestart=inputs['datestart'], dateend=inputs['dateend'], kind="html")
-        return render_template("Perhitungan Kertas Kerja BATTJA.htm", home = data['home'], s1 = data['s1'], s2 = data['s2'])
+        return render_template("Sheet 0 Kertas Kerja BATTJA.html", home = data['home'], s1 = data['s1'], s2 = data['s2'])
     else:
         return render_template("Daily Report Monitoring BAT UJTA.html", data={})
 

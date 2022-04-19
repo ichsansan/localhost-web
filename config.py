@@ -1,4 +1,4 @@
-FOLDER_NAME = '/root/SourceCode/Reset Page/dst'
+FOLDER_NAME = '/root/SourceCode/localhost-web/dst'
 
 UNIT_CONFIG = {
     'TAA1': {

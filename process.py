@@ -35,6 +35,8 @@ def get_docker_status():
 def get_bat_status():
     sopt_enable_desc = "SOOT BLOWER OPERATION ON/OFF (Main Start/Stop)"
     copt_enable_desc = "COMBUSTION ENABLE"
+    watchdog_desc = "WatchdogStatus"
+    copt_safeguard_desc = "SAFEGUARD:COMBUSTION"
 
     data = {}
     for unitname in config.UNIT_CONFIG.keys():
@@ -50,10 +52,18 @@ def get_bat_status():
                 LEFT JOIN tb_bat_raw raw
                 ON conf.f_tag_name = raw.f_address_no 
                 WHERE conf.f_description = "{copt_enable_desc}"
+                UNION
+                SELECT f_address_no, f_value FROM tb_bat_raw
+                WHERE f_address_no IN ("{watchdog_desc}", "{copt_safeguard_desc}")
                 """
         df = pd.read_sql(q, con).set_index('f_description')
         data[f'sootblow{unitname[-1]}'] = df.loc[sopt_enable_desc, 'f_value']
+        data[f'sootblow{unitname[-1]}wd'] = df.loc[watchdog_desc, 'f_value']
+        data[f'sootblow{unitname[-1]}sg'] = df.loc[copt_safeguard_desc, 'f_value']
+
         data[f'combustion{unitname[-1]}'] = df.loc[copt_enable_desc, 'f_value']
+        data[f'combustion{unitname[-1]}wd'] = df.loc[watchdog_desc, 'f_value']
+        data[f'combustion{unitname[-1]}sg'] = df.loc[copt_safeguard_desc, 'f_value']
     return data
 
 def do_restart_services():
