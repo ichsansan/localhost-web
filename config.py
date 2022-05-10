@@ -1,3 +1,4 @@
+VERSION = 'v2.0.0'
 FOLDER_NAME = '/root/SourceCode/localhost-web/dst'
 
 UNIT_CONFIG = {
