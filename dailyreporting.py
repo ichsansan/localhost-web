@@ -19,8 +19,7 @@ def generate_sheet(unitname, datestart = 'now', dateend = 'now'):
     print(f"Generate {unitname} on {datestart} to {dateend}")
 
     db_config = config.UNIT_CONFIG[unitname]
-    #con = f'mysql+mysqlconnector://root:P%40ssw0rd@{db_config["HOST"]}/{db_config["DB"]}'
-    con = f'mysql+mysqlconnector://smlds:SMLds2021!@{db_config["HOST"]}/{db_config["DB"]}'
+    con = f'mysql+mysqlconnector://root:P%40ssw0rd@{db_config["HOST"]}/{db_config["DB"]}'
 
     TAG_ENABLE_COPT = db_config['TAG_ENABLE_COPT']
     TAG_ENABLE_SOPT = db_config['TAG_ENABLE_SOPT']

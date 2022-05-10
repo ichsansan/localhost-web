@@ -41,8 +41,7 @@ def get_bat_status():
     data = {}
     for unitname in config.UNIT_CONFIG.keys():
         db_config = config.UNIT_CONFIG[unitname]
-        #con = f'mysql+mysqlconnector://root:P%40ssw0rd@{db_config["HOST"]}:3306/{db_config["DB"]}'
-        con = f'mysql+mysqlconnector://smlds:SMLds2021!@{db_config["HOST"]}/{db_config["DB"]}'
+        con = f'mysql+mysqlconnector://root:P%40ssw0rd@{db_config["HOST"]}:3306/{db_config["DB"]}'
 
         q = f"""SELECT conf.f_description, raw.f_value FROM tb_sootblow_conf_tags conf
                 LEFT JOIN tb_sootblow_raw raw 
