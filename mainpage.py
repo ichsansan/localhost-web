@@ -43,7 +43,7 @@ def daily_report_html():
     if 'Excel' in inputs["document"]:
         filename = generate_report(datestart = inputs['datestart'], dateend = inputs['dateend'])
         return redirect(f"/download/{filename}")
-    elif inputs["document"] == "HTMLfile":
+    elif 'HTML' in inputs["document"]:
         data = generate_report(datestart=inputs['datestart'], dateend=inputs['dateend'], kind="html")
         return render_template("Sheet 0 Kertas Kerja BATTJA.html", home = data['home'], s1 = data['s1'], s2 = data['s2'])
     else:

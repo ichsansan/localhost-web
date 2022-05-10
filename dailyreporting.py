@@ -19,7 +19,8 @@ def generate_sheet(unitname, datestart = 'now', dateend = 'now'):
     print(f"Generate {unitname} on {datestart} to {dateend}")
 
     db_config = config.UNIT_CONFIG[unitname]
-    con = f'mysql+mysqlconnector://root:P%40ssw0rd@{db_config["HOST"]}/{db_config["DB"]}'
+    #con = f'mysql+mysqlconnector://root:P%40ssw0rd@{db_config["HOST"]}/{db_config["DB"]}'
+    con = f'mysql+mysqlconnector://smlds:SMLds2021!@{db_config["HOST"]}/{db_config["DB"]}'
 
     TAG_ENABLE_COPT = db_config['TAG_ENABLE_COPT']
     TAG_ENABLE_SOPT = db_config['TAG_ENABLE_SOPT']
@@ -51,7 +52,8 @@ def generate_sheet(unitname, datestart = 'now', dateend = 'now'):
         LEFT JOIN tb_bat_history raw 
         ON dtl.f_tag_sensor = raw.f_address_no
         WHERE head.f_rule_descr = "Safeguard"
-        AND raw.f_date_rec BETWEEN "{datestart}" AND "{dateend}" """
+        AND raw.f_date_rec BETWEEN "{datestart}" AND "{dateend}"
+        AND dtl.f_is_active = 1 """
         # TODO: Waiting for watchdog fixing
         # UNION
         # SELECT 0 AS f_sequence, f_date_rec, '(' as f_bracket_open, f_address_no , f_address_no AS f_description, f_value , '=1)' AS f_bracket_close 
@@ -83,7 +85,8 @@ def generate_sheet(unitname, datestart = 'now', dateend = 'now'):
             LEFT JOIN tb_bat_history raw 
             ON dtl.f_tag_sensor = raw.f_address_no
             WHERE head.f_rule_descr = "SAFEGUARD"
-            AND raw.f_date_rec BETWEEN "{datestart} " AND "{dateend}" """
+            AND raw.f_date_rec BETWEEN "{datestart} " AND "{dateend}" 
+            AND dtl.f_is_active = 1 """
             # TODO: Waiting for watchdog fixing
             # UNION
             # SELECT 0 AS f_sequence, f_date_rec, '(' as f_bracket_open, f_address_no , f_address_no AS f_description, f_value , '=1)' AS f_bracket_close 
@@ -207,32 +210,32 @@ def generate_home(s1, s2):
     home = {
         'G7': s1['I19'],
         
-        'L11': round(s1['U23'] / 60, 1),
-        'L13': round((s1['U23'] + s1['AD23']) / 60, 1),
-        'L15': round(s1['AD54'] / 60, 1),
-        'L16': round(s1['AD54'] / 60, 1),
+        'L11': round(s1['U23'] / 60, 2),
+        'L13': round((s1['U23'] + s1['AD23']) / 60, 2),
+        'L15': round(s1['AD54'] / 60, 2),
+        'L16': round(s1['AD54'] / 60, 2),
         'L17': '-',
         'L18': '-',
-        'L19': round(s1[mw_loc] / 60, 1),
+        'L19': round(s1[mw_loc] / 60, 2),
         'L20': '-',
         'L21': '-',
-        'L23': round((s1['AD59'] * s1['U55'] / 100) / 60, 1), # Waktu disable oleh operator
-        'L25': round(s1['U54'] / 60, 1),
+        'L23': round((s1['AD59'] * s1['U55'] / 100) / 60, 2), # Waktu disable oleh operator
+        'L25': round(s1['U54'] / 60, 2),
 
-        'Y11': round(s2['U23'] / 60, 1),
-        'Y13': round((s2['U23'] + s2['AD23']) / 60, 1),
-        'Y15': round(s2['AD54'] / 60, 1),
-        'Y16': round(s2['AD54'] / 60, 1),
+        'Y11': round(s2['U23'] / 60, 2),
+        'Y13': round((s2['U23'] + s2['AD23']) / 60, 2),
+        'Y15': round(s2['AD54'] / 60, 2),
+        'Y16': round(s2['AD54'] / 60, 2),
         'Y17': '-',
         'Y18': '-',
-        'Y19': round(s2[mw_loc] / 60, 1),
+        'Y19': round(s2[mw_loc] / 60, 2),
         'Y20': '-',
         'Y21': '-',
-        'Y23': round((s2['AD59'] * s2['U55'] / 100) / 60, 1), # TODO: Waktu disable oleh operator
-        'Y25': round(s2['U54'] / 60, 1),
+        'Y23': round((s2['AD59'] * s2['U55'] / 100) / 60, 2), # TODO: Waktu disable oleh operator
+        'Y25': round(s2['U54'] / 60, 2),
 
-        'G32': round((s1['U23'] + s2['U23']) / 60, 1),
-        'G33': round((s1['U54'] + s2['U54']) / 60, 1),
+        'G32': round((s1['U23'] + s2['U23']) / 60, 2),
+        'G33': round((s1['U54'] + s2['U54']) / 60, 2),
         'G35': f"{round(100 * (s1['U23'] + s2['U23']) / (s1['U54'] + s2['U54']),2)} %"
     }
 

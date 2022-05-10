@@ -2,13 +2,13 @@ FOLDER_NAME = '/root/SourceCode/localhost-web/dst'
 
 UNIT_CONFIG = {
     'TAA1': {
-        'HOST': '192.168.1.10',
+        'HOST': '35.219.48.62', #'192.168.1.10',
         'DB': 'db_bat_tja1',
         'TAG_ENABLE_COPT':"EWS102/10FDF:SELENABLE_M.BO01",
         'TAG_ENABLE_SOPT': "EWS102/10CH:SELENABLE.BO01"
     },
     'TAA2': {
-        'HOST': '192.168.1.11',
+        'HOST': '35.219.48.62', #'192.168.1.11',
         'DB': 'db_bat_tja2',
         'TAG_ENABLE_COPT':"EWS202/20CH:DI_OPC_01.CIN",
         'TAG_ENABLE_SOPT': "EWS202/20CH:SELENABLE.BO01"
